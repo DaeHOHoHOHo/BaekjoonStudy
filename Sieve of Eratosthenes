@@ -9,7 +9,7 @@ int Eratos(int n)
 	{
 		if (arr[i])
 		{
-			for (int j = i + 1; j <= n; j += i)
+			for (int j = i * ; j <= n; j += i)
 			{
 				arr[j] = false;
 			}
