@@ -16,3 +16,5 @@ int Eratos(int n)
 		}
 	}
 }
+
+/* if arr[i] == true 일때 arr[i] 는 소수 */
