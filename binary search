@@ -19,4 +19,4 @@ int BinarySearch(int arr[], int size, int target)
 
 	return -1;
 }
-출처: https://spenshi.tistory.com/entry/test-1 [Maniac:티스토리]
+
