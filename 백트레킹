@@ -1,0 +1,46 @@
+#include <pch.h>
+#include<iostream>
+#include<vector>
+#include<algorithm>
+
+using namespace std;
+
+int N, M;
+int seq[9];
+bool used[8];
+
+void is_sequence(int curN, int n)
+{
+	seq[n] = curN;
+	if (n == M-1)
+	{
+		for (int i = 0; i < M; i++)
+		{
+			cout << seq[i] << " ";
+		}
+		cout << "\n";
+		return;
+	}
+	used[curN] = true;
+	for (int i = 1; i <= N; i++)
+	{
+		if (used[i] == false)
+		{
+			is_sequence(i, n + 1);
+		}
+	}
+	used[curN] = false;
+}
+
+int main()
+{
+	cin >> N >> M;
+
+	for (int i = 1; i <= N; i++)
+	{
+		is_sequence(i, 0);
+	}
+}
+
+//백트레킹 기본소스
+//백준 15649
