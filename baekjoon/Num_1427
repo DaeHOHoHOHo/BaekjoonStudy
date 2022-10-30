@@ -1,0 +1,27 @@
+#include<iostream>
+#include <vector>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+
+vector <int> q;
+
+int main()
+{
+	int n;
+	cin >> n;
+	
+	while (n > 0)
+	{
+		q.push_back(n % 10);
+		n = n / 10;
+	}
+
+	sort(q.begin(), q.end(), greater<>());
+	
+	for (int i = 0; i < q.size(); i++)
+	{
+		cout << q[i];
+	}
+}
