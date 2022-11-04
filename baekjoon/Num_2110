@@ -1,0 +1,43 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+using namespace std;
+
+
+int find_pos(long long int pos[], long long int start, long long int end,long long int n,long long int c) {
+	long long int left = 0;
+	long long int right = pos[end];
+	long long int ans = -1;
+	while (left<=right) {
+		long long int mid = (left + right)/2;
+		int i = 0;
+		int cnt = 1;
+		
+		for (int j = 0;j < n; j++) {
+			if (pos[j] - pos[i] >= mid) {
+				cnt = cnt + 1;
+				i = j;
+			}
+		}
+
+		if (cnt >= c) {
+			if (ans < mid) ans = mid;
+			
+			left = mid + 1;
+		}
+		else right = mid - 1;
+	}
+	return ans;
+}
+
+int main() {
+	long long int n, c;
+	cin >> n >> c;
+	long long int* pos = new long long int[n];
+	for (int i = 0;i < n;i++) {
+		cin >> pos[i];
+	}
+
+	sort(pos,pos+n);
+	cout<<find_pos(pos, 0, n - 1, n, c);
+}
