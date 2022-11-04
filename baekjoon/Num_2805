@@ -1,0 +1,58 @@
+#include<iostream>
+#include <vector>
+#include <string>
+#include <algorithm>
+
+using namespace std;
+
+vector <long long> arr;
+
+long long cut(long long a, long long b)
+{
+	if (a - b >= 0)
+		return a - b;
+	else
+		return 0;
+}
+
+int main()
+{
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	int n;
+	long long a, m;
+
+	cin >> n >> m;
+
+	for (int i = 0; i < n; i++)
+	{
+		cin >> a;
+		arr.push_back(a);
+	}
+	sort(arr.begin(), arr.end());
+
+	long long left = 0;
+	long long right = arr[static_cast<std::vector<long long, std::allocator<long long>>::size_type>(n) - 1] + 1;
+
+	while (left + 1 < right)
+	{
+		long long sum = 0;
+		long long mid = (left + right) / 2;
+
+		for (int i = 0; i < n; i++)
+		{
+			sum += cut(arr[i], mid);
+		}
+		if (sum >= m)
+		{
+			left = mid;
+		}
+		else if (sum < m)
+		{
+			right = mid;
+		}
+	}
+	cout << left;
+}
