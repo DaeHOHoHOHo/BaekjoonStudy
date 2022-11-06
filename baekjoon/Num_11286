@@ -1,0 +1,60 @@
+#include<iostream>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <queue>
+
+using namespace std;
+
+priority_queue <int, vector<int>> minusarr;
+priority_queue <int, vector<int>, greater<int>> plusarr;
+
+int main()
+{
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+
+	int n;
+	int a;
+	cin >> n;
+	for (int i = 0; i < n; i++)
+	{
+		cin >> a;
+		if (a == 0)
+		{
+			if (minusarr.empty() && plusarr.empty())
+			{
+				cout << 0 << "\n";
+			}
+			else if (minusarr.empty())
+			{
+				cout << plusarr.top() << "\n";
+				plusarr.pop();
+			}
+			else if (plusarr.empty())
+			{
+				cout << minusarr.top() << "\n";
+				minusarr.pop();
+			}
+			else if(-minusarr.top() <= plusarr.top())
+			{
+				cout << minusarr.top() << "\n";
+				minusarr.pop();
+			}
+			else if(-minusarr.top() > plusarr.top())
+			{
+				cout << plusarr.top() << "\n";
+				plusarr.pop();
+			}
+		}
+		else if (a > 0)
+		{
+			plusarr.push(a);
+		}
+		else if (a < 0)
+		{
+			minusarr.push(a);
+		}
+	}
+}
