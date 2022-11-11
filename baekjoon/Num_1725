@@ -1,0 +1,31 @@
+#include<iostream>
+#include <algorithm>
+#include <stack>
+
+using namespace std;
+
+int arr[100002];
+stack <int> s;
+int ans;
+
+int main()
+{
+	int n;
+	cin >> n;
+	for (int i = 1; i <= n; i++)
+	{
+		cin >> arr[i];
+	}
+	s.push(0); // stack이 비면 오류가 난다고 함
+	for (int i = 1; i <= n + 1; i++)
+	{
+		while (!s.empty() && arr[s.top()] > arr[i])
+		{
+			int a = s.top();
+			s.pop();
+			ans = max(ans, arr[a] * (i - s.top() - 1));
+		}
+		s.push(i);
+	}
+	cout << ans;
+}
