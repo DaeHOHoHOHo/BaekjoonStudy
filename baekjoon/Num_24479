@@ -1,0 +1,61 @@
+#include<iostream>
+#include <vector>
+#include <algorithm>
+#include <string>
+
+using namespace std;
+
+vector <vector<int>> graph;
+vector <int> visited;
+vector <int> sequence;
+
+int n, m, r, seq;
+
+void input()
+{
+	cin >> n >> m >> r;
+	graph.resize(n + 1);
+	visited.resize(n + 1);
+	sequence.resize(n + 1);
+	int u, v;
+	for (int i = 0; i < m; i++)
+	{
+		cin >> u >> v;
+		graph[u].push_back(v);
+		graph[v].push_back(u);
+	}
+	for (int i = 1; i <= n; i++)
+	{
+		sort(graph[i].begin(), graph[i].end());
+	}
+}
+
+void dfs(int a)
+{
+	sequence[a] = ++seq;
+	visited[a] = 1;
+	int graphsize = graph[a].size();
+	int v;
+	for (int i = 0; i < graphsize; i++)
+	{
+		v = graph[a][i];
+		if (visited[v] == 0)
+			dfs(v);
+	}
+}
+
+void sol()
+{
+	dfs(r);
+	for (int i = 1; i < n + 1; i++)
+	{
+		cout << sequence[i] << "\n";
+	}
+}
+
+
+int main()
+{
+	input();
+	sol();
+}
