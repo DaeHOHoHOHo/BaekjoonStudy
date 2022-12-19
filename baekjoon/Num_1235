@@ -1,0 +1,38 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <set>
+using namespace std;
+void fast_io(void)
+{
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
+}
+int main()
+{
+    vector<string> v;
+    fast_io();
+    int n, res = 1;
+    cin >> n;
+    while (n--)
+    {
+        string str;
+        cin >> str;
+        reverse(str.begin(), str.end());
+        v.push_back(str);
+    }
+    while (true)
+    {
+        set<string> s;
+        for (int i = 0; i < v.size(); i++)
+        {
+            s.insert(v[i].substr(0, res));
+        }
+        if (s.size() == v.size())
+            break;
+        else
+            res++;
+    }
+    cout << res;
+}
