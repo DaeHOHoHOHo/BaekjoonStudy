@@ -1,0 +1,78 @@
+#include <iostream>
+#include <algorithm>
+#include <string>
+#include <cstring>
+#include <cmath>
+#include <vector>
+#include <queue>
+
+#define INF 10000000000000
+using namespace std;
+
+// 1326 - 폴짝폴짝
+int n;
+int a, b, result = -1;
+vector<int> bridge, isVisited;
+
+
+void input(){
+    cin >> n;
+    bridge.assign(n + 1, 0);
+    isVisited.assign(n + 1, false);
+    for(int i = 1; i <= n; ++i){
+        cin >> bridge[i];
+    }
+    cin >> a >> b;
+}
+
+void BFS(int a){
+    queue<pair<int, int>> q;
+    q.push({a, 0});
+    isVisited[a] = true;
+
+    while(!q.empty()){
+        int cur = q.front().first;
+        int time = q.front().second;
+        int interval = bridge[cur];
+        q.pop();
+
+        if(cur == b){
+            result = time;
+            return;
+        }
+
+        // 오른쪽으로 진행하는 방법
+        for(int i = 1; cur + (interval * i) <= n; ++i){
+            int next = cur + (interval * i);
+            if(!isVisited[next]){
+                isVisited[next] = true;
+                q.push({next, time + 1});
+            }
+        }
+        // 왼쪽으로 진행하는 방법
+        for(int i = 1; cur - (interval * i) >= 1; ++i){
+            int next = cur - (interval * i);
+            if(!isVisited[next]){
+                isVisited[next] = true;
+                q.push({next, time + 1});
+            }
+        }
+    }
+}
+
+void solve(){
+    BFS(a);
+    cout << result;
+}
+
+int main(){
+
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+
+    input();
+    solve();
+
+    return 0;
+}
