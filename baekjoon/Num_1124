@@ -1,0 +1,113 @@
+#include <iostream>
+
+#include <vector>
+
+using namespace std;
+
+ 
+
+const int MAX = 100000 + 1;
+
+ 
+
+int minFactor[MAX];
+
+vector<int> prime;
+
+ 
+
+void eratosthenes(void)
+
+{
+
+        minFactor[0] = minFactor[1] = -1;
+
+        for (int i = 2; i < MAX; i++)
+
+                 minFactor[i] = i;
+
+ 
+
+        for (int i = 2; i*i < MAX; i++)
+
+                 if (minFactor[i] == i)
+
+                         for (int j = i * i; j < MAX; j += i)
+
+                                 if (minFactor[j] == j)
+
+                                          minFactor[j] = i;
+
+ 
+
+        for (int i = 2; i < MAX; i++)
+
+                 if (minFactor[i] == i)
+
+                         prime.push_back(i);
+
+}
+
+ 
+
+int main(void)
+
+{
+
+        ios_base::sync_with_stdio(0);
+
+        cin.tie(0);
+
+        int A, B;
+
+        cin >> A >> B;
+
+ 
+
+        int result = 0;
+
+        eratosthenes();
+
+        for (int i = A; i <= B; i++)
+
+        {
+
+                 int cnt = 0;
+
+                 int temp = i;
+
+                 for (int j = 0; j < prime.size(); j++)
+
+                 {
+
+                         while (!(temp % prime[j]))
+
+                         {
+
+                                 cnt++;
+
+                                 temp /= prime[j];
+
+                                 if (temp == 1)
+
+                                          break;
+
+                         }
+
+                         if (temp == 1)
+
+                                 break;
+
+                 }
+
+                 if (minFactor[cnt] == cnt)
+
+                         result++;
+
+        }
+
+        cout << result << "\n";
+
+        return 0;
+
+}
