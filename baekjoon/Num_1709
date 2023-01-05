@@ -1,0 +1,36 @@
+#include <iostream>
+using namespace std;
+
+long long radiusSquare;
+
+bool hasCircumference(long long x, long long y) {
+    return (x - 1) * (x - 1) + (y - 1) * (y - 1) < radiusSquare
+            && x * x + y * y > radiusSquare;
+}
+
+int main(void) {
+    int N, radius;
+
+    cin >> N;
+    radius = N / 2;
+    radiusSquare = (long long)radius * radius;
+    
+    unsigned int cnt = 0;
+    int xBase = 1;
+    for (int y = radius; y >= 0; --y) {
+        for (int x = xBase; x <= radius; ++x) {
+            if (hasCircumference(x, y)) {
+                ++cnt;
+                xBase = x;
+            } else {
+                if (x != xBase) {
+                    xBase = x - 1;
+                    break;
+                }
+            }
+        }
+    }
+
+    cout << cnt * 4 << endl;
+    return 0;
+}
