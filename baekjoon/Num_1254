@@ -1,0 +1,38 @@
+#include <iostream>
+#include <string>
+#include <string>
+using namespace std;
+
+string S;
+int length;
+
+
+
+bool palindrome(int idx)
+{
+	for (int i = 0; idx + i < length - i - 1; i++)
+		if (S[idx + i] != S[length - i - 1])
+			return false;
+
+	return true;
+
+}
+
+
+
+int main(void)
+{
+	cin >> S;
+	length = S.size();
+	int result = 0;
+
+	for (int i = 0; i < length; i++)
+		if (palindrome(i))
+		{
+			result = length + i;
+			break;
+		}
+
+	cout << result << endl;
+	return 0;
+}
