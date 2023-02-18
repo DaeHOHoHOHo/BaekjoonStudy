@@ -1,0 +1,43 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <iostream>
+#include <utility>
+#include <algorithm>
+#include <tuple>
+#include <vector>
+#include <string>
+#include <sstream>
+using namespace std;
+
+int main()
+{
+	ios::sync_with_stdio(false);
+	cin.tie(NULL);
+	cout.tie(NULL);
+	
+	int h, m, s;
+	int h2, m2, s2;
+
+	scanf("%d:%d:%d", &h, &m, &s);	//현재시간 입력
+	scanf("%d:%d:%d", &h2, &m2, &s2);	//임무시작시간 입력
+
+	h2 -= h;	//임무시작시간에서 현재시간을 뺀다
+	m2 -= m;
+	s2 -= s;
+
+	if (s2 < 0)	//초단위가 0보다 작으면 60을 더하고 분단위에서 1을 뺀다
+	{
+		s2 += 60;
+		m2--;
+	}
+	if (m2 < 0)	//분단위가 0보다 작으면 60을 더하고 시간단위에서 1을 뺀다
+	{
+		m2 += 60;
+		h2--;
+	}
+	if (h2 < 0)	//시간단위가 0보다 작아지면 24를 더한다
+		h2 += 24;
+
+	printf("%02d:%02d:%02d", h2, m2, s2);	//%02d는 2자리보다 작을때 빈자리에 0을 추가한다.
+
+	return 0;
+}
