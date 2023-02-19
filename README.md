@@ -1,5 +1,5 @@
 # BaekjoonStudy
-백준 알고리즘 공부 기록
+백준 알고리즘 공부기록
 
 
 ⛏️Used Tech<br>
